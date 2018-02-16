@@ -32,6 +32,10 @@ int rflib_coordinator_init(uint16_t cepin, uint16_t cspin, uint8_t channel,
 
 	radio->startListening();
 
+	for (i = 0; i < n_addresses; i++) {
+		radio->writeAckPayload(i + 1, NULL, 0);
+	}
+
 	return 0;
 }
 
@@ -62,7 +66,6 @@ int rflib_coordinator_set_reply(uint8_t address_idx, struct rflib_msg_t *msg)
 	/* TODO: check if these are persistent */
 	radio->flush_tx();
 	radio->writeAckPayload(address_idx + 1, msg, msg_size + 1);
-	radio->reUseTX();
 
 	return 0;
 }
@@ -70,5 +73,4 @@ int rflib_coordinator_set_reply(uint8_t address_idx, struct rflib_msg_t *msg)
 void rflib_coordinator_clear_reply(void)
 {
 	radio->flush_tx();
-	radio->reUseTX();
 }
