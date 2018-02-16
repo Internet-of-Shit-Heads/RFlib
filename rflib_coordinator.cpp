@@ -32,10 +32,6 @@ int rflib_coordinator_init(uint16_t cepin, uint16_t cspin, uint8_t channel,
 
 	radio->startListening();
 
-	for (i = 0; i < n_addresses; i++) {
-		radio->writeAckPayload(i + 1, NULL, 0);
-	}
-
 	return 0;
 }
 
