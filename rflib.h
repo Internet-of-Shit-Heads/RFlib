@@ -7,7 +7,7 @@
 struct rflib_msg_t {
 	uint8_t size;
 	uint8_t data[RFLIB_MAX_MSGSIZE];
-};
+} __attribute__((packed));
 
 /* Limited by the number of ACK payloads that can be pending at the same time. */
 #define RFLIB_MAX_RX_ADDRESSES 3
